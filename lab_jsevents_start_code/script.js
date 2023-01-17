@@ -15,6 +15,15 @@ const addTask = (event) => {
     task.textContent = event.target.newTask.value;
     //console.log(inputText);
 
+    //Show Date
+
+    const showDate = () => {
+        const showDate = document.createElement("#date"); 
+        showDate.value.toggle("show-date"); 
+        console.log(showDate)
+
+    }
+ 
     // Grab List
     const list = document.querySelector("#list");
 
@@ -51,3 +60,13 @@ function deleteTask(element) {
 taskForm.addEventListener('submit', addTask);
 
 deleteButton.addEventListener('click', deleteTask);
+
+// REMOVE BUTTON 
+
+// function removeAll(){
+//     document.getElementById("checkList").textContent = "";
+// }
+// function removeItem(item){
+//     var itemToRemove = document.getElementById(item);
+//     itemToRemove.parentNode.removeChild(itemToRemove);
+// }

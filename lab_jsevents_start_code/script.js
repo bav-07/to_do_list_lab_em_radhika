@@ -4,6 +4,15 @@ const enterButton = document.querySelector("#enter");
 
 const taskForm = document.querySelector("#task-form");
 
+//Show Date
+
+const dateButton = document.getElementById("date");
+
+function showDate() {
+    const date = new Date();
+    document.getElementById('date__value').textContent = date;
+}
+
 const addTask = (event) => {
     event.preventDefault();
     //console.log(event.target.newTask.value);
@@ -15,28 +24,28 @@ const addTask = (event) => {
     task.textContent = event.target.newTask.value;
     //console.log(inputText);
 
-    //Show Date
-
-    const showDate = () => {
-        const showDate = document.createElement("#date"); 
-        showDate.value.toggle("show-date"); 
-        console.log(showDate)
-
-    }
- 
     // Grab List
     const list = document.querySelector("#list");
 
-    // // Trying making task with button
-    // const taskText = event.target.newTask.value;
-    // const listItemWithButton = `<li class=""><div>${taskText}</div><button onclick="deleteTask(this)">Delete</button></li>`;
-    // list.textContent += listItemWithButton;
+    // Make checkbox
+    const itemComplete = document.createElement("input");
+    itemComplete.type = "checkbox";
+    itemComplete.onclick = function () {
+        const completedList = document.getElementById('completed-list');
+        this.parentElement.remove();
+        completedList.appendChild(task);
+    };
+    task.appendChild(itemComplete);
 
     // Make delete button
     const deleteButton = document.createElement("button");
     deleteButton.setAttribute('id', `${numOfTask}-delete`);
     const buttonText = document.createTextNode("delete");
     deleteButton.appendChild(buttonText);
+
+    deleteButton.onclick = function() {
+        this.parentElement.remove();
+    }
 
     // Add button to task, then task to list
     task.appendChild(deleteButton);
@@ -49,24 +58,11 @@ const addTask = (event) => {
     console.log(numOfTask);
 }
 
-// deleteTask = (event) => {
-//     console.log("bye");
-// }
-
 function deleteTask(element) {
     element.parentElement.remove();
 }
 
 taskForm.addEventListener('submit', addTask);
 
+dateButton.addEventListener("click", showDate);
 deleteButton.addEventListener('click', deleteTask);
-
-// REMOVE BUTTON 
-
-// function removeAll(){
-//     document.getElementById("checkList").textContent = "";
-// }
-// function removeItem(item){
-//     var itemToRemove = document.getElementById(item);
-//     itemToRemove.parentNode.removeChild(itemToRemove);
-// }
